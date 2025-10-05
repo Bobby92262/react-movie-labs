@@ -58,7 +58,7 @@ const HomePage = (props) => {
             genreFilter={genreFilter}
         />
         </Grid>
-        <MovieList movies={displayedMovies} selectFavourite={addToFavorites} />
+        <MovieList movies={displayedMovies} selectFavorite={addToFavorites} />
       </Grid>
     </Grid>
   );

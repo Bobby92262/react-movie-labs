@@ -12,18 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-<<<<<<< HEAD
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router": "^7.9.3"
-=======
-    "@mui/icons-material": "^7.3.2",
-    "@mui/material": "^7.3.2",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
->>>>>>> a82190ac1c3002fe3d1429f9cfbed7efb376545a
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

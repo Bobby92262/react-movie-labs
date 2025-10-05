@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-import PageTemplate from '../components/templateMovieListPage'
-import { getMovies } from "../api/tmdb-api";
-
-
-const HomePage = (props) => {
-  const [movies, setMovies] = useState([]);
-  const favorites = movies.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
-
-  const addToFavorites = (movieId) => {
-    const updatedMovies = movies.map((m) =>
-      m.id === movieId ? { ...m, favorite: true } : m
-    );
-    setMovies(updatedMovies);
-  };
-
-  useEffect(() => {
-    getMovies().then(movies => {
-      setMovies(movies);
-    });
-  }, []);
-
-
-  return (
-    <PageTemplate
-      title='Discover Movies'
-      movies={movies}
-      selectFavorite={addToFavorites}
-    />
-=======
 import React, { useState, useEffect } from "react";  
 import MovieList from "../components/movieList";
 import Grid from "@mui/material/Grid";
@@ -54,6 +22,13 @@ const HomePage = (props) => {
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else setGenreFilter(value);
+  };
+
+    const addToFavorites = (movieId) => {
+    const updatedMovies = movies.map((m) =>
+      m.id === movieId ? { ...m, favorite: true } : m
+    );
+    setMovies(updatedMovies);
   };
 
   useEffect(() => {
@@ -83,10 +58,9 @@ const HomePage = (props) => {
             genreFilter={genreFilter}
         />
         </Grid>
-        <MovieList movies={displayedMovies} />
+        <MovieList movies={displayedMovies} selectFavorite={addToFavorites} />
       </Grid>
     </Grid>
->>>>>>> a82190ac1c3002fe3d1429f9cfbed7efb376545a
   );
 };
 export default HomePage;

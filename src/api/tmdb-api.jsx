@@ -40,5 +40,3 @@ export const getMovieReviews = (id) => {
       return json.results;
     });
 };
-
-

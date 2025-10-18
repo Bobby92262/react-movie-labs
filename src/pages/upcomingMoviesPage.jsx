@@ -3,8 +3,9 @@ import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQuery} from "@tanstack/react-query";
 import { getUpcoming } from "../api/tmdb-api";
-import Spinner from '../components/spinner'
-import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
+import Spinner from '../components/spinner';
+import AddToWatchlistIcon from "../components/cardIcons/addToWatchList";
+
 
 
 const UpcomingMoviesPage = () => {
@@ -31,8 +32,9 @@ const { data, error, isPending, isError  } = useQuery({
     <PageTemplate
       title="Upcoming Movies" //Page HEader
       movies={movies}         // Movie data to display
-      action={() => <></>}
-      />
+      action={(movie) => 
+        <AddToWatchlistIcon movie={movie}/>}
+    />
   );
 };
 

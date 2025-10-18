@@ -4,15 +4,15 @@ import IconButton from "@mui/material/IconButton";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 const AddToWatchlistIcon = ({ movie }) => {
-  //const context = useContext(MoviesContext);
+  const {addToWatchList} = useContext(MoviesContext);
 
-  //const handleAddToWatchList = (e) => {
-    //e.preventDefault();
-    //context.addToFavorites(movie);
-  //};
+  const handleAddToWatchList = (e) => {
+    e.preventDefault();
+    addToWatchList(movie);
+  };
 
   return (
-    <IconButton aria-label="add to watch list" >
+    <IconButton aria-label="add to watch list" onClick={handleAddToWatchList} >
       <PlaylistAddIcon color="primary" fontSize="large" />
     </IconButton>
   );

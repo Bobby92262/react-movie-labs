@@ -14,6 +14,7 @@ import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router";
 import Avatar from '@mui/material/Avatar';
 import { MoviesContext } from "../../contexts/moviesContext";
+import dayjs from "dayjs";
 
 export default function MovieCard({movie, action}) {
   const { favorites, addToFavorites } = useContext(MoviesContext);
@@ -29,6 +30,9 @@ export default function MovieCard({movie, action}) {
     e.preventDefault();
     addToFavorites(movie);
   };
+
+  //Date formatting
+  const date = dayjs(movie.released_date).format('D MMM YY');
 
 
   return (
@@ -60,7 +64,7 @@ export default function MovieCard({movie, action}) {
           <Grid size={{xs: 6}}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {movie.release_date}
+              {date}
             </Typography>
           </Grid>
           <Grid size={{xs: 6}}>

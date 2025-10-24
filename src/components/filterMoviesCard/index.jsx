@@ -15,7 +15,6 @@ import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
 
 
-
 const formControl = 
   {
     margin: 1,
@@ -54,6 +53,10 @@ export default function FilterMoviesCard(props) {
   const handleGenreChange = (e) => {
     handleChange(e, "genre", e.target.value);
   };
+
+  const handleWatchedChange = (e) => {
+    handleChange(e, "watched", e.target.value)
+  }
 
 
   return (
@@ -94,6 +97,22 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="watached-label">Watched</InputLabel>
+            <Select
+                labelId="watched-label"
+                id="watched-select"
+                defaultValue=""
+                value={props.watchedFilter}
+                onChange={handleWatchedChange}
+            >
+            <MenuItem value="all">All</MenuItem>
+            <MenuItem value="watched">Watched</MenuItem>
+            <MenuItem value="unwatched">UnWatched</MenuItem>
+            </Select>
+        </FormControl>
+
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}

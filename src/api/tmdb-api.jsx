@@ -70,12 +70,30 @@ export const getMovie = (args) => {
    });
   };
 
-
   export const getMovieReviews = ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${import.meta.env.VITE_TMDB_KEY}`
+    ).then( (response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Something went wrong");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+   });
+  };
+
+  //Get movies by similarity/ utilised from watchlist for recommendations page --Not used yet
+  export const getSimilar = ({ queryKey }) => {
+    const [, idPart] = queryKey;
+    const { id } = idPart;
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${import.meta.env.VITE_TMDB_KEY}`
     ).then( (response) => {
       if (!response.ok) {
         return response.json().then((error) => {
@@ -104,3 +122,40 @@ export const getMovie = (args) => {
     throw error
  });
 };
+
+export const getTrendingMovies = () => {
+    return fetch(
+      "https://api.themoviedb.org/3/trending/movie/week?api_key=" +
+        import.meta.env.VITE_TMDB_KEY +
+        "&language=en-US"
+    ).then( (response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Something went wrong");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+   });
+  };
+
+  // Get top-rated movies -- Not used Yet
+  export const getTopRatedMovies = () => {
+    return fetch(
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=" +
+        import.meta.env.VITE_TMDB_KEY +
+        "&language=en-US"
+    ).then( (response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Something went wrong");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+   });
+  };

@@ -4,11 +4,12 @@ import IconButton from "@mui/material/IconButton";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 const AddToWatchlistIcon = ({ movie }) => {
-  const {addToWatchList} = useContext(MoviesContext);
+  const {addToWatchList, addToWatched} = useContext(MoviesContext);
 
   const handleAddToWatchList = (e) => {
     e.preventDefault();
     addToWatchList(movie);
+    addToWatched(movie);
   };
 
   return (

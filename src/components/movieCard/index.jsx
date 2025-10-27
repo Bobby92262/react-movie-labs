@@ -32,7 +32,7 @@ export default function MovieCard({movie, action}) {
   };
 
   //Date formatting
-  const date = dayjs(movie.released_date).format('D MMM YY');
+  const date = dayjs(movie.release_date).format('D MMM YY');
 
 
   return (

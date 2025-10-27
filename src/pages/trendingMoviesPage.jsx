@@ -32,12 +32,11 @@ const TrendingMoviesPage = () => {
     <PageTemplate
       title="Trending This Week"
       movies={movies}
-      action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
-      }}
+      action={[
+        (movie) => <AddToFavoritesIcon movie={movie} />
+      ]}
     />
   );
-
 };
 
 export default TrendingMoviesPage;

@@ -23,7 +23,7 @@ const [watched, setWatched] = useState([])
   const addToWatchList = (movie) => {
     if (!watchlist.some((m) => m.id === movie.id)){
       const newWatchList = [...watchlist, movie.id];
-      setWatchList(newWatchList, movie)
+      setWatchList(newWatchList)
       console.log("Updated watchlist:", newWatchList);
   } else {
     console.log("Movie already in watchlist:",watchlist);

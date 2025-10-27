@@ -76,7 +76,9 @@ export default function MovieCard({movie, action}) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        {action(movie)}
+        {action?.map((renderAction, i) => (
+          <span key={i}>{renderAction(movie)}</span>
+        ))}
         <Link to={`/movies/${movie.id}`}>
         <Button variant="outlined" size="medium" color="primary">
           More Info ...

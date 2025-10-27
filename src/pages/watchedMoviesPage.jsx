@@ -13,16 +13,14 @@ import WriteReview from "../components/cardIcons/writeReview";
 
 
 const WatchedMoviesPage = () => {
-  const {watched: movieIds = [] } = useContext(MoviesContext);
+  const {watchlist: movieIds = [] } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
   const watchedMovieQueries = useQueries({
-    queries: movieIds.map((movieId) => {
-      return {
+    queries: movieIds.map((movieId) => ({
         queryKey: ['movie', { id: movieId }],
-        queryFn: () => getMovie(movieId),
-      }
-    })
+        queryFn: getMovie,
+    }))
   });
   
   // Check if any of the parallel queries is still loading.
@@ -34,10 +32,13 @@ const WatchedMoviesPage = () => {
 
   // This probably needs updating
   // Empty array initialy to mitigate errors
-  const movies = watchedMovieQueries.map((q) => {
-    q.data.genre_ids = q.data.genres.map(g => g.id)
-    return { ...q.data, genre_ids };
-  });
+  const movies = watchedMovieQueries
+  .filter((q) => q.data) // only include successful fetches
+  .map((q) => ({
+    ...q.data,
+    genre_ids: q.data.genres?.map((g) => g.id) || [],
+  }));
+
 
   const toDo = () => true;
 
@@ -45,15 +46,9 @@ const WatchedMoviesPage = () => {
     <PageTemplate
       title="Watched Movies"
       movies={movies}
-      action={(movie) => {
-        //Change favs and review things below
-        return (
-          <>
-            <RemoveFromFavorites movie={movie}/>
-            <WriteReview movie={movie}/>
-          </>
-        );
-      }}
+      action={[
+        (movie) => <WriteReview movie={movie}/>
+      ]}
     />
   );
 };

@@ -9,6 +9,12 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import { getMovieCredits } from "../../api/tmdb-api";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from '../spinner';
+import { Box } from "@mui/material";
+import ActorPopUp from "../actorPopUp/actorPopUp";
+
 
 
 const root = {
@@ -23,6 +29,20 @@ const chip = { margin: 0.5 };
 
 const MovieDetails = ({ movie }) => {  // Don't miss this!
 const [drawerOpen, setDrawerOpen] = useState(false);
+const [selectedActor, setSelectedActor] = useState(null);
+
+ const {data: credits, isPending, isError, error} = useQuery ({
+    queryKey: ['credits',{id:movie.id}],
+    queryFn: getMovieCredits,
+  });
+
+   if (isPending) {
+      return <Spinner />
+    }
+  
+    if (isError) {
+      return <h1>{error.message}</h1>
+    } 
 
 
   return (
@@ -70,6 +90,46 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           </li>
         ))}
       </Paper>
+
+      <Typography variant="h5" component="h3" sx={{marginTop: 4 }}>
+        Cast
+      </Typography>
+      {isPending ? (
+        <Spinner />
+      ) : isError ? (
+        <Typography color="error">Failed to load cast</Typography>
+      ) : credits?.cast?.length? (
+      <Paper component="ul" sx={{...root}}>
+        <li>
+          <Chip label="Cast" sx={{...chip}} color="primary" />
+        </li>
+        {credits.cast.slice(0 , 10).map((actor) => (
+          <Box key={actor.id} sx ={{ textAlign: "center", width: 120, cursor: "pointer" }} onClick={() => setSelectedActor(actor)} >
+            <img
+              src={
+                actor.profile_path
+                ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}`
+                : "/default-avatar.png"
+              }
+              alt={actor.name}
+              style={{ borderRadius: "8px", width: "100%"}}
+              />
+              <Typography variant="body2" sx={{ fontWeight: "bold", mt:1 }}>
+                {actor.name}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                {actor.character}
+              </Typography>
+          </Box>
+        ))}
+        {selectedActor && (
+          <ActorPopUp actor={selectedActor} onClose={() => setSelectedActor(null)} />
+        )}
+      </Paper>
+      ) : (
+        <Typography>No cast data available</Typography>
+      )}
+
       <Fab
         color="secondary"
         variant="extended"

@@ -33,11 +33,11 @@ const TopRatedMoviesPage = () => {
 
   return (
     <PageTemplate
-      title="Trending This Week"
+      title="Top Rated Movies"
       movies={movies}
-      action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
-      }}
+      action={[
+        (movie) => <AddToFavoritesIcon movie={movie} />
+      ]}
     />
   );
 

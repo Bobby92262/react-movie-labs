@@ -6,6 +6,9 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from '../spinner'
+import { Box, Button } from "@mui/material";
+import { Link } from "react-router";
+import MovieIcon from "@mui/icons-material/Movie";
 
 
 const TemplateMoviePage = ({ movie, children }) => {
@@ -53,16 +56,23 @@ const TemplateMoviePage = ({ movie, children }) => {
                     </ImageListItem>
                 ))}
             </ImageList>
+            <Box sx={{ mb: 2 }}>
+              <Link to={`/movies/${movie.id}/similar`} style={{ textDecoration: "none" }}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<MovieIcon />}
+                  sx={{ borderRadius: 2 }}
+                  >
+                    Show Similar Movies
+                  </Button>
+                </Link>
+            </Box>
           </div>
         </Grid>
 
         <Grid size={{xs: 9}}>
           <div>{children}</div>
-          <div>
-            <h2>test 3</h2> 
-            
-            </div>
-          
         </Grid>
       </Grid>
     </>

@@ -10,6 +10,7 @@ import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
+import RemoveMovieIcon from "../components/cardIcons/removeMovieIcon";
 
 
 const WatchedMoviesPage = () => {
@@ -47,7 +48,8 @@ const WatchedMoviesPage = () => {
       title="Watched Movies"
       movies={movies}
       action={[
-        (movie) => <WriteReview movie={movie}/>
+        (movie) => <WriteReview movie={movie}/>,
+        (movie) => <RemoveMovieIcon movie={movie}/>
       ]}
     />
   );

@@ -36,12 +36,19 @@ const [watched, setWatched] = useState([])
     }
   }
   
-  // We will use this function in the next step
+  
   const removeFromFavorites = (movie) => {
     setFavorites( favorites.filter(
       (mId) => mId !== movie.id
     ) )
   };
+
+   
+  const removeFromWatchlist = (movie) => {
+    setWatchList((prev) => prev.filter((id) => id !== movie.id));
+    setWatched((previous) => previous.filter((id) => id !== movie.id));
+  };
+
 
   const addReview = (movie, review) => {
     setMyReviews( {...myReviews, [movie.id]: review } )
@@ -59,6 +66,7 @@ const [watched, setWatched] = useState([])
         watchlist,
         addToWatchList,
         addToWatched,
+        removeFromWatchlist,
       }}
     >
       {props.children}

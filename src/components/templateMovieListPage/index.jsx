@@ -7,6 +7,8 @@ import { MoviesContext } from "../../contexts/moviesContext";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import SideBarMenu from "../sideBarMenu";
+import { Typography } from "@mui/material";
+import MovieIcon from "@mui/icons-material/Movie";
 
 function MovieListPageTemplate({ movies, title, action}) {
   const [nameFilter, setNameFilter] = useState("");
@@ -39,20 +41,27 @@ function MovieListPageTemplate({ movies, title, action}) {
   };
 
   return (
-    <Box sx={{ height: "100vh", overflow: "hidden", dispaly: "flex", flexDirection: "column" }}>
-      <Grid container sx={{ backgroundColor: "background.default", minHeight: "95vh" }}>
-
+    <Box sx={{ width: "100%", height: "100vh",  display: "flex", flexDirection: "column", backgroundColor: "background.paper" }}>
+      
         <Grid size={{ xs: 12 }}>
           <Header title={title} />
         </Grid>
 
-        <Grid container columns={12}>
+        <Grid container columns={12} 
+        sx={{
+          display:"flex",
+          flexDirection: "column",
+          flex: 1,
+          width: "100%",
+          overflow: "hidden",
+          }}>
+            
           <Grid 
-            size={{ xs: 12, md: 2}}
+            size={{ xs: 12, md: 3}}
             sx={{
               display: "flex",
               flexDirection: "column",
-              height: "auto",
+              alignSelf: "stretch",
               backgroundColor: "background.paper",
               p: 2,
               borderRight: "1px solid #333",
@@ -67,14 +76,25 @@ function MovieListPageTemplate({ movies, title, action}) {
           </Grid>
 
           <Grid
-            size={{ xs: 12, md: 8 }}
+            size={{ xs: 12, md: 7 }}
             sx={{
+              display: "flex",
+              flexDirection: "column",
+              flex: 1,
               overflowY: "auto",
-              maxHeight: "100vh",
               p: 2,
             }}
             >
-          <MovieList action={action} movies={displayedMovies} />
+              {displayedMovies.length > 0 ? (
+                <MovieList action={action} movies={displayedMovies} />
+              ) : (
+                <Box textAlign={"center"}>
+                  <MovieIcon sx={{ fontSize: 60, color: "text.secondary", mb: 1 }} />
+                  <Typography variant="h6" color="text.secondary">
+                    No movies to dispaly.
+                  </Typography>
+                </Box>
+              )}
           </Grid>
 
           <Grid
@@ -82,9 +102,10 @@ function MovieListPageTemplate({ movies, title, action}) {
             sx={{
               position: "sticky",
               top: 0,
-              height: "100vh",
+              alignSelf: "stretch",
               backgroundColor: "background.paper",
               p: 1.5,
+              height: "100vh",
               borderRadius: 2,
               borderLeft: "1px solid #333",
             }}
@@ -92,7 +113,6 @@ function MovieListPageTemplate({ movies, title, action}) {
               <SideBarMenu />
             </Grid>
         </Grid>
-      </Grid>
       </Box>
   );
 }

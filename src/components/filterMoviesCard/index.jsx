@@ -18,7 +18,7 @@ import Spinner from '../spinner';
 const formControl = 
   {
     margin: 1,
-    minWidth: "90%",
+    minWidth: "100%",
     backgroundColor: "#1f2a44",
     color: "#ffffff",
     borderRadius: 1,
@@ -64,14 +64,17 @@ export default function FilterMoviesCard(props) {
   return (
     <Card 
       sx={{
+        display: "flex",
+        flexDirection: "column",
         backgroundColor: "background.paper",
         color: "text.primary",
         padding: 2,
         borderRadius: 2,
         border: "1px solid #2c3e50",
+        overflow: "hidden",
       }} 
       variant="outlined">
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Typography variant="h5" component="h1" color="secondary">
           <SearchIcon fontSize="large" />
           Filter the movies.
@@ -115,24 +118,18 @@ export default function FilterMoviesCard(props) {
                 onChange={handleWatchedChange}
             >
             <MenuItem value="all">All</MenuItem>
-            <MenuItem value="watched">Watched</MenuItem>
-            <MenuItem value="unwatched">UnWatched</MenuItem>
+            <MenuItem value="watched">Seen Before</MenuItem>
+            <MenuItem value="unwatched">Not Seen Yet</MenuItem>
             </Select>
         </FormControl>
 
       </CardContent>
       <CardMedia
-        sx={{ height: 300 }}
+        component="img"
+        sx={{ width: "100%", maxHeight: 200, objectFit: "cover", borderRadius: 1 }}
         image={img}
         title="Filter"
       />
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
-        </Typography>
-      </CardContent>
     </Card>
   );
 }

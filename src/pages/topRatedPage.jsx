@@ -7,6 +7,7 @@ import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
+import AddToWatchlistIcon from "../components/cardIcons/addToWatchList";
 
 
 const TopRatedMoviesPage = () => {
@@ -36,7 +37,8 @@ const TopRatedMoviesPage = () => {
       title="Top Rated Movies"
       movies={movies}
       action={[
-        (movie) => <AddToFavoritesIcon movie={movie} />
+        (movie) => <AddToFavoritesIcon movie={movie} />,
+        (movie) => <AddToWatchlistIcon movie={movie}/>,
       ]}
     />
   );

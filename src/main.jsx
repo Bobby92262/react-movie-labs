@@ -17,6 +17,7 @@ import TopRatedMoviesPage from "./pages/topRatedPage";
 import SimilarMoviesPage from "./pages/similarMoviesPage";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
+import { Box } from "@mui/material";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,24 +33,26 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <SiteHeader />
-          <MoviesContextProvider>
-            <Routes>
-              <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-              <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-              <Route path="/movies/:id" element={<MoviePage />} />
-              <Route path="/" element={<HomePage />} />
-              <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-              <Route path="/movies/upcoming" element={<UpcomingMoviesPage/> } />
-              <Route path="/movies/trending" element={<TrendingMoviesPage/>} />
-              <Route path="/movies/watched" element={<WatchedMoviesPage/>} />
-              <Route path="/movies/top_rated" element={<TopRatedMoviesPage/>} />
-              <Route path="/movies/:id/similar" element={<SimilarMoviesPage/>} />
-              <Route path="*" element={ <Navigate to="/" /> } />
-            </Routes>
-          </MoviesContextProvider>
-        </BrowserRouter>
+        <Box sx={{ height: "100vh", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+          <BrowserRouter>
+            <SiteHeader />
+            <MoviesContextProvider>
+              <Routes>
+                <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+                <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+                <Route path="/movies/:id" element={<MoviePage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+                <Route path="/movies/upcoming" element={<UpcomingMoviesPage/> } />
+                <Route path="/movies/trending" element={<TrendingMoviesPage/>} />
+                <Route path="/movies/watched" element={<WatchedMoviesPage/>} />
+                <Route path="/movies/top_rated" element={<TopRatedMoviesPage/>} />
+                <Route path="/movies/:id/similar" element={<SimilarMoviesPage/>} />
+                <Route path="*" element={ <Navigate to="/" /> } />
+              </Routes>
+            </MoviesContextProvider>
+          </BrowserRouter>
+        </Box>
         <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
     </QueryClientProvider>

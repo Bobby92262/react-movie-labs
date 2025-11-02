@@ -4,6 +4,8 @@ import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 import { MoviesContext } from "../../contexts/moviesContext";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 function MovieListPageTemplate({ movies, title, action}) {
   const [nameFilter, setNameFilter] = useState("");
@@ -36,26 +38,67 @@ function MovieListPageTemplate({ movies, title, action}) {
   };
 
   return (
-    <Grid container>
-      <Grid size={12}>
-        <Header title={title} />
-      </Grid>
-      <Grid container sx={{flex: "1 1 500px"}}>
-        <Grid 
-          key="find" 
-          size={{xs: 12, sm: 6, md: 4, lg: 3, xl: 2}} 
-          sx={{padding: "20px"}}
-        >
-          <FilterCard
-            onUserInput={handleChange}
-            titleFilter={nameFilter}
-            genreFilter={genreFilter}
-            watchedFilter={watchedFilter}
-          />
+    <Box sx={{ height: "100vh", overflow: "hidden", dispaly: "flex", flexDirection: "column" }}>
+      <Grid container sx={{ backgroundColor: "background.default", minHeight: "95vh" }}>
+
+        <Grid size={{ xs: 12 }}>
+          <Header title={title} />
         </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
+
+        <Grid container columns={12}>
+          <Grid 
+            size={{ xs: 12, md: 2}}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "auto",
+              backgroundColor: "background.paper",
+              p: 2,
+              borderRight: "1px solid #333",
+            }}
+          >
+            <FilterCard
+              onUserInput={handleChange}
+              titleFilter={nameFilter}
+              genreFilter={genreFilter}
+              watchedFilter={watchedFilter}
+            />
+          </Grid>
+
+          <Grid
+            size={{ xs: 12, md: 8 }}
+            sx={{
+              overflowY: "auto",
+              maxHeight: "100vh",
+              p: 2,
+            }}
+            >
+          <MovieList action={action} movies={displayedMovies} />
+          </Grid>
+
+          <Grid
+            size={{ xs: 12, md: 2}}
+            sx={{
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              backgroundColor: "background.paper",
+              p: 2,
+              borderLeft: "1px solid #333",
+            }}
+            >
+              <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", height: "75%" }}>
+                <Button variant="outlined">Home</Button>
+                <Button variant="outlined">Favourites</Button>
+                <Button variant="outlined">Upcoming</Button>
+                <Button variant="outlined">Trending</Button>
+                <Button variant="outlined">Watched</Button>
+                <Button variant="outlined">Top Rated</Button>
+              </Box>
+            </Grid>
+        </Grid>
       </Grid>
-    </Grid>
+      </Box>
   );
 }
 export default MovieListPageTemplate;

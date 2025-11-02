@@ -34,7 +34,6 @@ const { data, error, isPending, isError  } = useQuery({
       title="Upcoming Movies" //Page HEader
       movies={movies}         // Movie data to display
       action={[
-        (movie) => <AddToWatchlistIcon movie={movie}/>,
         (movie) => <AddToFavoritesIcon movie={movie}/>,
       ]}
     />

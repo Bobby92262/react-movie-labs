@@ -53,7 +53,7 @@ function MovieListPageTemplate({ movies, title, action}) {
           flexDirection: "column",
           flex: 1,
           width: "100%",
-          overflow: "hidden",
+          overflow: "auto",
           }}>
             
           <Grid 

@@ -1,3 +1,4 @@
+// Discover movies
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -14,6 +15,7 @@ export const getMovies = () => {
   });
 };
 
+// Get full details for a specific movie
 export const getMovie = (args) => {
   console.log(args)
   const [, idPart] = args.queryKey;
@@ -33,7 +35,7 @@ export const getMovie = (args) => {
  });
 };
 
-
+// Get a list of movie genres
   export const getGenres = () => {
     return fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
@@ -52,6 +54,7 @@ export const getMovie = (args) => {
    });
   };
 
+  // Get Images for posters 
   export const getMovieImages = ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
@@ -106,7 +109,7 @@ export const getMovie = (args) => {
    });
   };
 
-  //Get movies by similarity/ utilised from watchlist for recommendations page --Not used yet
+  //Get movies by similarity/ utilised from watchlist for recommendations page 
   export const getSimilar = ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;

@@ -31,19 +31,18 @@ const TemplateMoviePage = ({ movie, children }) => {
 
   return (
     <>
-      
       <MovieHeader movie={movie} />
-
-      <Grid container spacing={5} style={{ padding: "15px" }}>
+      <Grid container spacing={5} style={{ padding: "15px", p: 2 }}>
         <Grid size={{xs: 3}}>
-          <div sx={{
+          <Box sx={{
             display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-around",
+            flexDirection: "column",
+            alignContent: "center",
           }}>
             <ImageList
                 sx={{
-                    height: "100vh",
+                    maxHeight: 480,
+                    overflowY: "auto",
                 }}
                 cols={1}
             >
@@ -52,12 +51,14 @@ const TemplateMoviePage = ({ movie, children }) => {
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
                         alt={image.poster_path}
+                        style={{width: "100%", display: "block" }}
                     />
                     </ImageListItem>
                 ))}
             </ImageList>
-            <Box sx={{ mb: 2 }}>
-              <Link to={`/movies/${movie.id}/similar`} style={{ textDecoration: "none" }}>
+
+            <Box sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}>
+              <Link to={`/movies/${movie.id}/similar`} style={{ textDecoration: "none", width: "100%" }}>
                 <Button
                   variant="contained"
                   color="secondary"
@@ -68,7 +69,7 @@ const TemplateMoviePage = ({ movie, children }) => {
                   </Button>
                 </Link>
             </Box>
-          </div>
+          </Box>
         </Grid>
 
         <Grid size={{xs: 9}}>

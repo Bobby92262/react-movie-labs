@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import { MoviesContext } from "../../contexts/moviesContext";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import SideBarMenu from "../sideBarMenu";
 
 function MovieListPageTemplate({ movies, title, action}) {
   const [nameFilter, setNameFilter] = useState("");
@@ -83,18 +84,12 @@ function MovieListPageTemplate({ movies, title, action}) {
               top: 0,
               height: "100vh",
               backgroundColor: "background.paper",
-              p: 2,
+              p: 1.5,
+              borderRadius: 2,
               borderLeft: "1px solid #333",
             }}
             >
-              <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", height: "75%" }}>
-                <Button variant="outlined">Home</Button>
-                <Button variant="outlined">Favourites</Button>
-                <Button variant="outlined">Upcoming</Button>
-                <Button variant="outlined">Trending</Button>
-                <Button variant="outlined">Watched</Button>
-                <Button variant="outlined">Top Rated</Button>
-              </Box>
+              <SideBarMenu />
             </Grid>
         </Grid>
       </Grid>

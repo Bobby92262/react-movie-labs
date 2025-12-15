@@ -1,8 +1,13 @@
+<<<<<<< HEAD:src/components/templateMovieListPage/index.jsx
 import React, { useState, useContext } from "react";
+=======
+import React, { useState } from "react";
+>>>>>>> e947ab2a476b7114883bb23389661088dd76e923:movies/src/components/templateMovieListPage/index.jsx
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+<<<<<<< HEAD:src/components/templateMovieListPage/index.jsx
 import { MoviesContext } from "../../contexts/moviesContext";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -18,6 +23,13 @@ function MovieListPageTemplate({ movies, title, action}) {
   // Using watchlist array from moviescontext (cardsIcon/addToWatchList)
   const {watchlist} = useContext(MoviesContext);
   const watchedIds= watchlist;
+=======
+
+function MovieListPageTemplate({ movies, title, selectFavorite }) {
+  const [nameFilter, setNameFilter] = useState("");
+  const [genreFilter, setGenreFilter] = useState("0");
+  const genreId = Number(genreFilter);
+>>>>>>> e947ab2a476b7114883bb23389661088dd76e923:movies/src/components/templateMovieListPage/index.jsx
 
   let displayedMovies = movies
     .filter((m) => {
@@ -25,6 +37,7 @@ function MovieListPageTemplate({ movies, title, action}) {
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+<<<<<<< HEAD:src/components/templateMovieListPage/index.jsx
     })
     // WatchedFilter logic
     .filter((m) => {
@@ -114,6 +127,35 @@ function MovieListPageTemplate({ movies, title, action}) {
             </Grid>
         </Grid>
       </Box>
+=======
+    });
+
+  const handleChange = (type, value) => {
+    if (type === "name") setNameFilter(value);
+    else setGenreFilter(value);
+  };
+
+  return (
+    <Grid container>
+      <Grid size={12}>
+        <Header title={title} />
+      </Grid>
+      <Grid container sx={{flex: "1 1 500px"}}>
+        <Grid 
+          key="find" 
+          size={{xs: 12, sm: 6, md: 4, lg: 3, xl: 2}} 
+          sx={{padding: "20px"}}
+        >
+          <FilterCard
+            onUserInput={handleChange}
+            titleFilter={nameFilter}
+            genreFilter={genreFilter}
+          />
+        </Grid>
+        <MovieList selectFavorite={selectFavorite} movies={displayedMovies}></MovieList>
+      </Grid>
+    </Grid>
+>>>>>>> e947ab2a476b7114883bb23389661088dd76e923:movies/src/components/templateMovieListPage/index.jsx
   );
 }
 export default MovieListPageTemplate;

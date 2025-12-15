@@ -1,7 +1,29 @@
-import React, {useState, useEffect} from "react";
-import { useParams } from "react-router";
-import MovieHeader from "../components/headerMovie/";
+import React from "react";
+import { useParams } from 'react-router';
 import MovieDetails from "../components/movieDetails/";
+<<<<<<< HEAD:src/pages/movieDetailsPage.jsx
+import PageTemplate from "../components/templateMoviePage";
+import { getMovie } from '../api/tmdb-api'
+import { useQuery } from '@tanstack/react-query';
+import Spinner from '../components/spinner'
+// import useMovie from "../hooks/useMovie";   Redundant
+
+
+const MoviePage = (props) => {
+  const { id } = useParams();
+    const { data: movie, error, isPending, isError  } = useQuery({
+    queryKey: ['movie', {id: id}],
+    queryFn: getMovie,
+  })
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
+=======
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -24,46 +46,18 @@ const MoviePage = (props) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+>>>>>>> e947ab2a476b7114883bb23389661088dd76e923:movies/src/pages/movieDetailsPage.jsx
 
   return (
     <>
       {movie ? (
         <>
-          <MovieHeader movie={movie} />
-          <Grid container spacing={5} style={{ padding: "15px" }}>
-            <Grid size={{xs: 3}}>
-              <div sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-around",
-              }}>
-            <ImageList
-                sx={{
-                height: "100vh",
-                }}
-                cols={1}
-            >
-                {images.map((image) => (
-                <ImageListItem
-                key={image.file_path}
-                cols={1}
-                >
-                    <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                    alt={image.file_path}
-                    />
-                </ImageListItem>
-                ))}
-            </ImageList>
-              </div>
-            </Grid>
-            <Grid size={{xs: 9}}>
-              <MovieDetails movie={movie} />
-            </Grid>
-          </Grid>
+          <PageTemplate movie={movie}>
+            <MovieDetails movie={movie} />
+          </PageTemplate>
         </>
       ) : (
-        <h2>Waiting for API data</h2>
+        <p>Waiting for movie details</p>
       )}
     </>
   );
